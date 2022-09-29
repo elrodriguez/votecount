@@ -1,0 +1,13 @@
+{
+    "name": "VoteCount",
+    "alias": "votecount",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\VoteCount\\Providers\\VoteCountServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
