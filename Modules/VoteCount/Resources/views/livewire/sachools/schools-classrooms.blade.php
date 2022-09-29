@@ -56,5 +56,6 @@
             });
             box.find('.modal-content').css({'background-color': 'rgba(122, 85, 7, 0.5)'});
         });
+        /////prueba
     </script>
 </div>
