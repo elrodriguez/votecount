@@ -12,9 +12,9 @@ use App\Models\Province;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\WithFileUploads;
-use Elrod\UserActivity\Activity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+
 class UserCreate extends Component
 {
     use WithFileUploads;
@@ -42,12 +42,13 @@ class UserCreate extends Component
     public $number_search;
     public $personSearch;
     public $xopen = false;
-    
-    public function mount(){
-        
-        $this->document_types = IdentityDocumentType::where('active',true)->get();
-        $this->countries = Country::where('active',true)->get();
-        $this->departments = Department::where('active',true)->get();
+
+    public function mount()
+    {
+
+        $this->document_types = IdentityDocumentType::where('active', true)->get();
+        $this->countries = Country::where('active', true)->get();
+        $this->departments = Department::where('active', true)->get();
     }
 
     public function render()
@@ -55,17 +56,18 @@ class UserCreate extends Component
         return view('setting::livewire.user.user-create');
     }
 
-    public function searchPerson(){
+    public function searchPerson()
+    {
         $this->validate([
             'number_search' => 'required|min:8'
         ]);
 
-        $this->personSearch = Person::where('number',$this->number_search)->first();
+        $this->personSearch = Person::where('number', $this->number_search)->first();
 
         $this->xopen = true;
         $encuentra = '';
 
-        if($this->personSearch){
+        if ($this->personSearch) {
             $encuentra = $this->personSearch->id;
             $this->country_id = $this->personSearch->country_id;
             $this->department_id = $this->personSearch->department_id;
@@ -81,34 +83,34 @@ class UserCreate extends Component
             $this->telephone = $this->personSearch->telephone;
             $this->sex = $this->personSearch->sex;
 
-            list($y,$m,$d) = explode('-',$this->personSearch->birth_date);
+            list($y, $m, $d) = explode('-', $this->personSearch->birth_date);
 
-            $this->birth_date = $d.'/'.$m.'/'.$y;
-
+            $this->birth_date = $d . '/' . $m . '/' . $y;
         }
-        
-        if($encuentra == ''){
+
+        if ($encuentra == '') {
             $this->dispatchBrowserEvent('per-employees-search_a', ['msg' => Lang::get('staff::labels.msg_search_not'), 'numberPerson' => $this->number_search]);
-        }else{
+        } else {
             $this->dispatchBrowserEvent('per-employees-search_b', ['msg' => Lang::get('staff::labels.msg_search_ok_a'), 'personId' => $this->personSearch->id]);
         }
     }
 
-    public function save(){
+    public function save()
+    {
 
         $this->validate([
             'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|min:3|max:255|unique:users,email'
         ]);
-        
+
         $ddate = null;
-        if($this->birth_date){
-            list($d,$m,$y) = explode('/',$this->birth_date);
-            $ddate = $y.'-'.$m.'-'. $d;
+        if ($this->birth_date) {
+            list($d, $m, $y) = explode('/', $this->birth_date);
+            $ddate = $y . '-' . $m . '-' . $d;
         }
 
-        if($this->personSearch){
+        if ($this->personSearch) {
             $person = $this->personSearch;
-        }else{
+        } else {
 
             $this->validate([
                 'names' => 'required|min:3|max:255',
@@ -137,7 +139,7 @@ class UserCreate extends Component
                 'names' => $this->names,
                 'last_name_father' => $this->last_name_father,
                 'last_name_mother' => $this->last_name_mother,
-                'full_name' => $this->last_name_father.' '.$this->last_name_mother.' '.$this->names,
+                'full_name' => $this->last_name_father . ' ' . $this->last_name_mother . ' ' . $this->names,
                 'trade_name' => null,
                 'address' => $this->address,
                 'email' => $this->email,
@@ -146,46 +148,41 @@ class UserCreate extends Component
                 'birth_date' => $ddate
             ]);
         }
-        
+
 
         $user = User::create([
-            'name' => $this->names.' '.$this->last_name_father,
+            'name' => $this->names . ' ' . $this->last_name_father,
             'email' => $this->email,
             'password' => Hash::make('12345678'),
             'username' => $this->number,
             'person_id' => $person->id
         ]);
 
-        if($this->photo){
-            $this->photo->storeAs('person/'.$person->id.'/', $person->id.'.png','public');
+        if ($this->photo) {
+            $this->photo->storeAs('person/' . $person->id . '/', $person->id . '.png', 'public');
         }
-
-        $activity = new Activity;
-        $activity->modelOn(User::class,$user->id,'users');
-        $activity->causedBy(Auth::user());
-        $activity->routeOn(route('setting_users_create'));
-        $activity->logType('create');
-        $activity->log('creó un nuevo usuario');
-        $activity->save();
 
         $this->clearForm();
         $this->dispatchBrowserEvent('set-user-save', ['msg' => 'Datos guardados correctamente.']);
     }
 
-    public function getProvinves(){
-        $this->provinces = Province::where('department_id',$this->department_id)
-            ->where('active',true)->get();
+    public function getProvinves()
+    {
+        $this->provinces = Province::where('department_id', $this->department_id)
+            ->where('active', true)->get();
         $this->districts = [];
     }
-    public function getPDistricts(){
-        $this->districts = District::where('province_id',$this->province_id)
-            ->where('active',true)->get();
+    public function getPDistricts()
+    {
+        $this->districts = District::where('province_id', $this->province_id)
+            ->where('active', true)->get();
     }
 
-    public function clearForm(){
+    public function clearForm()
+    {
         $this->names = null;
         $this->last_name_father = null;
-        $this->last_name_mother= null;
+        $this->last_name_mother = null;
         $this->address = null;
         $this->telephone = null;
         $this->email = null;
