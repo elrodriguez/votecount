@@ -63,7 +63,9 @@
                                         <i class="fal fa-pencil-alt mr-1"></i><?php echo e(__('labels.edit')); ?>
 
                                     </a>
-             
+                                    <a href="<?php echo e(route('votecount_schools_classrooms',$school->id)); ?>" class="dropdown-item">
+                                        <i class="fal fa-chalkboard-teacher mr-1"></i>Aulas
+                                    </a>
                                     <div class="dropdown-divider"></div>
 
                                     <button onclick="confirmDelete(<?php echo e($school->id); ?>)" type="button" class="dropdown-item text-danger">

@@ -62,7 +62,9 @@
                                     <a href="{{ route('votecount_schools_edit',$school->id) }}" class="dropdown-item">
                                         <i class="fal fa-pencil-alt mr-1"></i>{{ __('labels.edit') }}
                                     </a>
-             
+                                    <a href="{{ route('votecount_schools_classrooms',$school->id) }}" class="dropdown-item">
+                                        <i class="fal fa-chalkboard-teacher mr-1"></i>Aulas
+                                    </a>
                                     <div class="dropdown-divider"></div>
 
                                     <button onclick="confirmDelete({{ $school->id }})" type="button" class="dropdown-item text-danger">

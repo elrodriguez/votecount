@@ -42,9 +42,9 @@ class SchoolsController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function classrooms($id)
     {
-        //
+        return view('votecount::schools.classrooms')->with('id', $id);
     }
 
     /**

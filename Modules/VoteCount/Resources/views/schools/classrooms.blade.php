@@ -2,17 +2,18 @@
 @section('breadcrumb')
     <x-company-name></x-company-name>
     <li class="breadcrumb-item">{{ __('votecount::labels.module_name') }}</li>
+    <li class="breadcrumb-item"><a href="{{ route('votecount_schools')}}">{{ __('votecount::labels.lbl_schools') }}</a></li>
+    <li class="breadcrumb-item">Aulas</li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><x-js-get-date></x-js-get-date></li>
 @endsection
 @section('subheader')
     <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-tachometer-alt-fast'></i>Tablero <span class='fw-300'>de resumen</span> <sup class='badge badge-primary fw-500'>New</sup>
-        <small>Disponibles para el usuario</small>
+        <i class="subheader-icon fal fa-house"></i></i>{{ __('votecount::labels.lbl_schools') }}<sup class='badge badge-primary fw-500'>Aulas</sup>   
     </h1>
     <div class="subheader-block">
-        Dashboard
+        Aulas
     </div>
 @endsection
 @section('content')
-
+<livewire:votecount::sachools.schools-classrooms :school_id="$id" />
 @endsection

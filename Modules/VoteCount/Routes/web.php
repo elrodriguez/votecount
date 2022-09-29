@@ -17,6 +17,7 @@ Route::prefix('votecount')->group(function () {
         Route::get('list', 'SchoolsController@index')->name('votecount_schools');
         Route::get('create', 'SchoolsController@create')->name('votecount_schools_create');
         Route::get('edit/{id}', 'SchoolsController@edit')->name('votecount_schools_edit');
+        Route::get('classrooms/{id}', 'SchoolsController@classrooms')->name('votecount_schools_classrooms');
     });
     Route::prefix('tables')->group(function () {
         Route::get('list', 'VoteCountController@index')->name('votecount_tables');

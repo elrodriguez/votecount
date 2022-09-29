@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('breadcrumb'); ?>
     <?php if (isset($component)) { $__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\CompanyName::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
@@ -13,7 +14,8 @@
 <?php $component = $__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9; ?>
 <?php unset($__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9); ?>
 <?php endif; ?>
-    <li class="breadcrumb-item"><?php echo e(__('votecount::labels.module_name')); ?></li>
+    <li class="breadcrumb-item"><?php echo app('translator')->get('staff::labels.module_name'); ?></li>
+    <li class="breadcrumb-item"><?php echo e(__('staff::labels.lbl_employees')); ?></li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><?php if (isset($component)) { $__componentOriginalab70499045def3ea46a51a0c5d10e7b6f1952525 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\JsGetDate::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('js-get-date'); ?>
@@ -31,15 +33,29 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('subheader'); ?>
     <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-tachometer-alt-fast'></i>Tablero <span class='fw-300'>de resumen</span> <sup class='badge badge-primary fw-500'>New</sup>
-        <small>Disponibles para el usuario</small>
+        <i class='subheader-icon fal fa-users'></i><?php echo e(__('staff::labels.lbl_employees')); ?> <sup class='badge badge-primary fw-500'><?php echo e(__('staff::labels.lbl_list')); ?></sup>
+        <small><?php echo app('translator')->get('staff::labels.lbl_available_user'); ?></small>
     </h1>
     <div class="subheader-block">
-        Dashboard
+        <?php echo app('translator')->get('staff::labels.lbl_list'); ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-
+<?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('staff::employees.employees-list')->html();
+} elseif ($_instance->childHasBeenRendered('kHyPT20')) {
+    $componentId = $_instance->getRenderedChildComponentId('kHyPT20');
+    $componentTag = $_instance->getRenderedChildComponentTagName('kHyPT20');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('kHyPT20');
+} else {
+    $response = \Livewire\Livewire::mount('staff::employees.employees-list');
+    $html = $response->html();
+    $_instance->logRenderedChild('kHyPT20', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('votecount::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('staff::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/Staff\Resources/views/employees/index.blade.php ENDPATH**/ ?>

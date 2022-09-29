@@ -69,7 +69,7 @@
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('conteodevotos_colegios')): ?>
                     <li class="<?php echo e($path[0] == 'votecount' && $path[1] == 'schools' && $path[2] == 'create' ? 'active' : ''); ?>">
                         <a href="<?php echo e(route('votecount_schools_create')); ?>" title="Nuevo Colegio" data-filter-tags="Nuevo Colegio">
-                            <span class="nav-link-text" data-i18n="nav.nuevo_olegio">Colegio</span>
+                            <span class="nav-link-text" data-i18n="nav.nuevo_olegio">Nuevo Colegio</span>
                         </a>
                     </li>
                     <?php endif; ?>
