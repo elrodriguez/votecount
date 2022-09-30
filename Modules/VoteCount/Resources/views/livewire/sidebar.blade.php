@@ -50,6 +50,7 @@
                 </ul>
             </li>
             @endcan
+            {{-- este espacio no se esta actualizando --}}
             @can('conteodevotos_mesas')
             <li class="{{ $path[0] == 'votecount' && $path[1] == 'tables' ? 'active open' : '' }}">
                 <a href="javascript:void(0);" title="tables" data-filter-tags="tables">
