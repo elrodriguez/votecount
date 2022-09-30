@@ -6,6 +6,7 @@ use Livewire\Component;
 use Modules\VoteCount\Entities\VoteClassRoom;
 use Modules\VoteCount\Entities\VoteSchool;
 use Modules\VoteCount\Entities\VoteTable;
+use Illuminate\Support\Facades\Lang;
 
 class TableCreate extends Component
 {
@@ -17,7 +18,7 @@ class TableCreate extends Component
     public $number_table;
     public $number_order;
     public $pavilion;
-    public $flat;
+    public $flat = 1;
 
     public function mount()
     {
@@ -49,7 +50,7 @@ class TableCreate extends Component
 
         VoteTable::create([
             'school_id'     => $this->school_id,
-            'classroom_id'  => $this->classroom_id,
+            'class_room_id'  => $this->classroom_id,
             'number_table'  => $this->number_table,
             'number_order'  => $this->number_order,
             'pavilion'      => $this->pavilion,

@@ -61,7 +61,7 @@
             </form>
         </div>
         <div class="card-footer d-flex flex-row align-items-center">
-            <a href="{{ route('votecount_schools')}}" type="button" class="btn btn-secondary waves-effect waves-themed">Listado</a>
+            <a href="{{ route('votecount_tables')}}" type="button" class="btn btn-secondary waves-effect waves-themed">Listado</a>
             <button wire:click="save" wire:loading.attr="disabled" type="button" class="btn btn-info ml-auto waves-effect waves-themed">Guardar</button>
         </div>
     </div>

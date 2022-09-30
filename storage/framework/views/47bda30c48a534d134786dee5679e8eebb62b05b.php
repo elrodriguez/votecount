@@ -103,8 +103,8 @@ unset($__errorArgs, $__bag); ?>
             </form>
         </div>
         <div class="card-footer d-flex flex-row align-items-center">
-            <a href="<?php echo e(route('votecount_schools')); ?>" type="button" class="btn btn-secondary waves-effect waves-themed">Listado</a>
-            <button wire:click="save" wire:loading.attr="disabled" type="button" class="btn btn-info ml-auto waves-effect waves-themed">Guardar</button>
+            <a href="<?php echo e(route('votecount_tables')); ?>" type="button" class="btn btn-secondary waves-effect waves-themed">Listado</a>
+            <button wire:click="update" wire:loading.attr="disabled" type="button" class="btn btn-info ml-auto waves-effect waves-themed"><?php echo e(__('labels.to_update')); ?></button>
         </div>
     </div>
     <script type="text/javascript">
@@ -115,7 +115,7 @@ unset($__errorArgs, $__bag); ?>
                 window.livewire.find('<?php echo e($_instance->id); ?>').getClassroom(data.id);
             });
         });
-        document.addEventListener('vote-table-save', event => {
+        document.addEventListener('vote-table-update', event => {
             initApp.playSound('<?php echo e(url("themes/smart-admin/media/sound")); ?>', 'voice_on')
             let box = bootbox.alert({
                 title: "<i class='fal fa-check-circle text-warning mr-2'></i> <span class='text-warning fw-500'>Éxito!</span>",
@@ -128,4 +128,4 @@ unset($__errorArgs, $__bag); ?>
         });
     </script>
 </div>
-<?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/livewire/tables/table-create.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/livewire/tables/table-edit.blade.php ENDPATH**/ ?>

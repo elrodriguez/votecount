@@ -114,7 +114,7 @@
                 callback: function(result)
                 {
                     if(result){
-                        @this.deletetable(id)
+                        @this.deleteTable(id)
                     }
                 }
             });

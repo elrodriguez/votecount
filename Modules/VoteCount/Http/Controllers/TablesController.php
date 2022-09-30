@@ -33,7 +33,7 @@ class TablesController extends Controller
      */
     public function edit($id)
     {
-        return view('votecount::tables.edit');
+        return view('votecount::tables.edit')->with('id', $id);
     }
 
     /**

@@ -48,10 +48,10 @@ class TableList extends Component
             ->paginate($this->show);
     }
 
-    public function deleteSchool($id)
+    public function deleteTable($id)
     {
         try {
-            VoteSchool::find($id)->delete();
+            VoteTable::find($id)->delete();
             $res = 'success';
         } catch (\Illuminate\Database\QueryException $e) {
             $res = 'error';
