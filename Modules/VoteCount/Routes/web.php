@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::prefix('votecount')->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->prefix('votecount')->group(function () {
     Route::get('/', 'VoteCountController@index')->name('votecount_dashboard');
 
     Route::prefix('schools')->group(function () {
@@ -20,8 +20,8 @@ Route::prefix('votecount')->group(function () {
         Route::get('classrooms/{id}', 'SchoolsController@classrooms')->name('votecount_schools_classrooms');
     });
     Route::prefix('tables')->group(function () {
-        Route::get('list', 'VoteCountController@index')->name('votecount_tables');
-        Route::get('create', 'VoteCountController@index')->name('votecount_tables_create');
-        Route::get('edit/{id}', 'VoteCountController@index')->name('votecount_tables_edit');
+        Route::get('list', 'TablesController@index')->name('votecount_tables');
+        Route::get('create', 'TablesController@create')->name('votecount_tables_create');
+        Route::get('edit/{id}', 'TablesController@edit')->name('votecount_tables_edit');
     });
 });

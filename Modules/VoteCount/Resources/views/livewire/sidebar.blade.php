@@ -32,18 +32,18 @@
             <li class="{{ $path[0] == 'votecount' && $path[1] == 'employees_type' ? 'active open' : '' }}">
                 <a href="javascript:void(0);" title="Colegios" data-filter-tags="Colegios">
                     <i class="fal fa-house"></i>
-                    <span class="nav-link-text" data-i18n="nav.colegios">@lang('votecount::labels.lbl_schools')</span>
+                    <span class="nav-link-text" data-i18n="nav.colegios">CENTROS DE VOTACIÓN</span>
                 </a>
                 <ul>
                     <li class="{{ $path[0] == 'votecount' && $path[1] == 'schools' && $path[2] == 'list' ? 'active' : '' }}">
                         <a href="{{ route('votecount_schools') }}" title="Listado de colegios" data-filter-tags="Listado de colegios">
-                            <span class="nav-link-text" data-i18n="nav.listado_colegios">Listado de colegios</span>
+                            <span class="nav-link-text" data-i18n="nav.listado_colegios">Listado</span>
                         </a>
                     </li>
                     @can('conteodevotos_colegios')
                     <li class="{{ $path[0] == 'votecount' && $path[1] == 'schools' && $path[2] == 'create' ? 'active' : '' }}">
                         <a href="{{ route('votecount_schools_create') }}" title="Nuevo Colegio" data-filter-tags="Nuevo Colegio">
-                            <span class="nav-link-text" data-i18n="nav.nuevo_olegio">Nuevo Colegio</span>
+                            <span class="nav-link-text" data-i18n="nav.nuevo_olegio">Nuevo</span>
                         </a>
                     </li>
                     @endcan
@@ -51,21 +51,21 @@
             </li>
             @endcan
             @can('conteodevotos_mesas')
-            <li class="{{ $path[0] == 'votecount' && $path[1] == 'occupations' ? 'active open' : '' }}">
+            <li class="{{ $path[0] == 'votecount' && $path[1] == 'tables' ? 'active open' : '' }}">
                 <a href="javascript:void(0);" title="tables" data-filter-tags="tables">
-                    <i class="fal fa-person-dolly"></i>
-                    <span class="nav-link-text" data-i18n="nav.tables">Mesas</span>
+                    <i class="fal fa-keynote"></i>
+                    <span class="nav-link-text" data-i18n="nav.tables">{{ __('votecount::labels.lbl_tables') }}</span>
                 </a>
                 <ul>
-                    <li class="{{ $path[0] == 'votecount' && $path[1] == 'occupations' && $path[2] == 'list' ? 'active' : '' }}">
+                    <li class="{{ $path[0] == 'votecount' && $path[1] == 'tables' && $path[2] == 'list' ? 'active' : '' }}">
                         <a href="{{ route('votecount_tables') }}" title="Listado" data-filter-tags="Listado">
-                            <span class="nav-link-text" data-i18n="nav.listado">Listado de Mesas</span>
+                            <span class="nav-link-text" data-i18n="nav.listado">Listado</span>
                         </a>
                     </li>
                     @can('conteodevotos_mesas')
                     <li class="{{ $path[0] == 'votecount' && $path[1] == 'tables' && $path[2] == 'create' ? 'active' : '' }}">
                         <a href="{{ route('votecount_tables_create') }}" title="Nueva mesa" data-filter-tags="Nueva mesa">
-                            <span class="nav-link-text" data-i18n="nav.nueva_mesa">REgistrar Mesa</span>
+                            <span class="nav-link-text" data-i18n="nav.nueva_mesa">Nuevo</span>
                         </a>
                     </li>
                     @endcan
