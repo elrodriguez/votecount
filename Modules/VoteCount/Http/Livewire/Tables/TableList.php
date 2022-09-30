@@ -35,6 +35,7 @@ class TableList extends Component
     {
         return VoteTable::join('vote_schools', 'school_id', 'vote_schools.id')
             ->join('vote_class_rooms', 'class_room_id', 'vote_class_rooms.id')
+            ->join('people', 'person_id', 'people.id')
             ->select(
                 'vote_schools.full_name',
                 'vote_class_rooms.name',
@@ -42,7 +43,9 @@ class TableList extends Component
                 'vote_tables.number_table',
                 'vote_tables.number_order',
                 'vote_tables.pavilion',
-                'vote_tables.flat'
+                'vote_tables.flat',
+                'people.full_name AS person_name',
+                'people.number AS person_number'
             )
             ->where('number_table', 'like', '%' . $this->search . '%')
             ->paginate($this->show);

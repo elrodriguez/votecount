@@ -1,4 +1,7 @@
 @extends('votecount::layouts.master')
+@section('styles')
+    <link rel="stylesheet" media="screen, print" href="{{ url('themes/smart-admin/css/formplugins/select2/select2.bundle.css') }}">
+@endsection
 @section('breadcrumb')
     <x-company-name></x-company-name>
     <li class="breadcrumb-item">{{ __('votecount::labels.module_name') }}</li>
@@ -14,5 +17,8 @@
     </div>
 @endsection
 @section('content')
-
+<livewire:votecount::votes.votes-create />
+@endsection
+@section('script')
+    <script src="{{ url('themes/smart-admin/js/formplugins/select2/select2.bundle.js') }}"></script>
 @endsection

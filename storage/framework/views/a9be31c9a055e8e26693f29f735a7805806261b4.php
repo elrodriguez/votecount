@@ -48,15 +48,15 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('votecount::tables.table-create', [])->html();
-} elseif ($_instance->childHasBeenRendered('XHbdCjp')) {
-    $componentId = $_instance->getRenderedChildComponentId('XHbdCjp');
-    $componentTag = $_instance->getRenderedChildComponentTagName('XHbdCjp');
+} elseif ($_instance->childHasBeenRendered('GjDAsy0')) {
+    $componentId = $_instance->getRenderedChildComponentId('GjDAsy0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('GjDAsy0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('XHbdCjp');
+    $_instance->preserveRenderedChild('GjDAsy0');
 } else {
     $response = \Livewire\Livewire::mount('votecount::tables.table-create', []);
     $html = $response->html();
-    $_instance->logRenderedChild('XHbdCjp', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('GjDAsy0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

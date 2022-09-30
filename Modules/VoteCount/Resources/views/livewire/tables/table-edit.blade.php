@@ -31,13 +31,27 @@
                         <div class="invalid-feedback-2">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="person_id">Personero<span class="text-danger">*</span> </label>
+                        <div wire:ignore>
+                            <select wire:model="person_id" id="person_id" class="custom-select" required="">
+                                <option value="">Seleccionar</option>
+                                @foreach($people as $person)
+                                <option {{ $person_id == $person->id ? 'selected' : '' }} value="{{ $person->id }}">{{ $person->number }} - {{ $person->full_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('person_id')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="school_id">Colegio<span class="text-danger">*</span> </label>
                         <div wire:ignore>
                             <select wire:model="school_id" id="school_id" class="custom-select" required="">
                                 <option value="">Seleccionar</option>
                                 @foreach($schools as $school)
-                                <option value="{{ $school->id }}">{{ $school->full_name }}</option>
+                                <option {{ $school_id == $school->id ? 'selected' : '' }} value="{{ $school->id }}">{{ $school->full_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -50,7 +64,7 @@
                         <select wire:model="classroom_id" id="classroom_id" class="custom-select" required="">
                             <option value="">Seleccionar</option>
                             @foreach($classrooms as $classroom)
-                            <option value="{{ $classroom->id }}">{{ $classroom->name }}</option>
+                            <option {{ $classroom_id == $classroom->id ? 'selected' : '' }} value="{{ $classroom->id }}">{{ $classroom->name }}</option>
                             @endforeach
                         </select>
                         @error('classroom_id')

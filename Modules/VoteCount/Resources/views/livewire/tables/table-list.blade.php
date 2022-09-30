@@ -45,6 +45,7 @@
                         <th>NÚMERO ORDEN</th>
                         <th>PABELLÓN</th>
                         <th>PISO</th>
+                        <th>PERSONERO</th>
                     </tr>
                 </thead>
                 <tbody class="">
@@ -79,6 +80,7 @@
                         <td class="align-middle text-right">{{ $table->number_order }}</td>
                         <td class="align-middle text-right">{{ $table->pavilion }}</td>
                         <td class="align-middle text-right">{{ $table->flat }}</td>
+                        <td class="align-middle">{{ $table->person_number }} - {{ $table->person_name }}</td>
                     </tr>
                     @endforeach
                 </tbody>

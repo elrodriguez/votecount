@@ -2,6 +2,7 @@
 
 namespace Modules\VoteCount\Http\Livewire\Tables;
 
+use App\Models\Person;
 use Livewire\Component;
 use Modules\VoteCount\Entities\VoteClassRoom;
 use Modules\VoteCount\Entities\VoteSchool;
@@ -12,17 +13,19 @@ class TableCreate extends Component
 {
     public $schools = [];
     public $classrooms = [];
-
+    public $people = [];
     public $school_id;
     public $classroom_id;
     public $number_table;
     public $number_order;
     public $pavilion;
     public $flat = 1;
+    public $person_id;
 
     public function mount()
     {
         $this->schools = VoteSchool::select('id', 'full_name')->get();
+        $this->people = Person::whereNotIn('id', ['1', '2'])->select('id', 'number', 'full_name')->get();
     }
 
     public function render()
@@ -45,7 +48,8 @@ class TableCreate extends Component
             'number_table' => 'required',
             'number_order'  => 'required|numeric',
             'pavilion'      => 'required|string',
-            'flat'          => 'required|numeric'
+            'flat'          => 'required|numeric',
+            'person_id'     => 'required'
         ]);
 
         VoteTable::create([
@@ -54,7 +58,8 @@ class TableCreate extends Component
             'number_table'  => $this->number_table,
             'number_order'  => $this->number_order,
             'pavilion'      => $this->pavilion,
-            'flat'          => $this->flat
+            'flat'          => $this->flat,
+            'person_id'     => $this->person_id
         ]);
         $this->clearForm();
 

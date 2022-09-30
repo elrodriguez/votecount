@@ -45,6 +45,7 @@
                         <th>NÚMERO ORDEN</th>
                         <th>PABELLÓN</th>
                         <th>PISO</th>
+                        <th>PERSONERO</th>
                     </tr>
                 </thead>
                 <tbody class="">
@@ -79,6 +80,7 @@
                         <td class="align-middle text-right"><?php echo e($table->number_order); ?></td>
                         <td class="align-middle text-right"><?php echo e($table->pavilion); ?></td>
                         <td class="align-middle text-right"><?php echo e($table->flat); ?></td>
+                        <td class="align-middle"><?php echo e($table->person_number); ?> - <?php echo e($table->person_name); ?></td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
@@ -114,7 +116,7 @@
                 callback: function(result)
                 {
                     if(result){
-                        window.livewire.find('<?php echo e($_instance->id); ?>').deletetable(id)
+                        window.livewire.find('<?php echo e($_instance->id); ?>').deleteTable(id)
                     }
                 }
             });
