@@ -24,4 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('votecount')->group(func
         Route::get('create', 'TablesController@create')->name('votecount_tables_create');
         Route::get('edit/{id}', 'TablesController@edit')->name('votecount_tables_edit');
     });
+
+    Route::get('votes', 'VotesController@index')->name('votecount_votes');
 });

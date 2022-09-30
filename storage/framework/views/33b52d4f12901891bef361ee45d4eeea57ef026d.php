@@ -98,6 +98,14 @@
                 </ul>
             </li>
             <?php endif; ?>
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('conteodevotos_registro_votos')): ?>
+            <li class="<?php echo e($path[0] == 'votecount' && $path[1] == 'votes' ? 'active open' : ''); ?>">
+                <a href="<?php echo e(route('votecount_votes')); ?>" title="votos" data-filter-tags="votos">
+                    <i class="fal fa-money-check-edit"></i>
+                    <span class="nav-link-text" data-i18n="nav.votos">REGISTRAR VOTOS</span>
+                </a>
+            </li>
+            <?php endif; ?>
         </ul>
     </nav>
 </div>

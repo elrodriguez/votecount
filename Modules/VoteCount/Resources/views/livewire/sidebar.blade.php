@@ -50,7 +50,6 @@
                 </ul>
             </li>
             @endcan
-            {{-- este espacio no se esta actualizando --}}
             @can('conteodevotos_mesas')
             <li class="{{ $path[0] == 'votecount' && $path[1] == 'tables' ? 'active open' : '' }}">
                 <a href="javascript:void(0);" title="tables" data-filter-tags="tables">
@@ -71,6 +70,14 @@
                     </li>
                     @endcan
                 </ul>
+            </li>
+            @endcan
+            @can('conteodevotos_registro_votos')
+            <li class="{{ $path[0] == 'votecount' && $path[1] == 'votes' ? 'active open' : '' }}">
+                <a href="{{ route('votecount_votes') }}" title="votos" data-filter-tags="votos">
+                    <i class="fal fa-money-check-edit"></i>
+                    <span class="nav-link-text" data-i18n="nav.votos">REGISTRAR VOTOS</span>
+                </a>
             </li>
             @endcan
         </ul>
