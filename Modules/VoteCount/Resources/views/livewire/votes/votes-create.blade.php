@@ -59,7 +59,7 @@
                             @foreach($politicalparties as $key => $politicalparty)
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center p-0 m-0">
-                                    <img src="{{ asset('storage/'.$politicalparty['logo']) }}" class="mr-5 p-0 m-0" style="width: 50px">
+                                    <img src="{{ asset($politicalparty['logo']) }}" class="mr-5 p-0 m-0" style="width: 50px">
                                     <h3 class="p-0 m-0">{{ $politicalparty['name'] }}</h3>
                                 </div>
                                 <input wire:model="politicalparties.{{ $key }}.quantity" name="politicalparties[{{ $key }}].quantity" type="number" class="form-control" style="width: 100px">
