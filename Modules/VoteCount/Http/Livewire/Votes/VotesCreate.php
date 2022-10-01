@@ -22,8 +22,12 @@ class VotesCreate extends Component
     public $school_id;
     public $classroom_id;
     public $table_id;
-    public $type_id;
+    public $type_id = 'M';
+    public $total_r = 0;
+    public $total_p = 0;
+    public $total_d = 0;
     public $total = 0;
+    public $votes_total;
 
     public function mount()
     {
@@ -57,7 +61,9 @@ class VotesCreate extends Component
                 'id' => $politicalparty->id,
                 'logo' => $politicalparty->logo,
                 'name' => $politicalparty->name,
-                'quantity' => 0
+                'total_r' => 0,
+                'total_p' => 0,
+                'total_d' => 0
             ];
         }
     }
@@ -65,17 +71,20 @@ class VotesCreate extends Component
     public function save()
     {
         $this->validate([
-            'type_id' => 'required',
+            //'type_id' => 'required',
             'school_id' => 'required',
             'classroom_id' => 'required',
-            'table_id' => 'required'
+            'table_id' => 'required',
+            //'votes_total' => 'required|numeric'
         ]);
 
         if ($this->politicalparties > 0) {
             foreach ($this->politicalparties as $key => $val) {
                 $this->validate([
                     'politicalparties.' . $key . '.id' => 'required',
-                    'politicalparties.' . $key . '.quantity' => 'numeric|required'
+                    'politicalparties.' . $key . '.total_r' => 'numeric|required',
+                    'politicalparties.' . $key . '.total_p' => 'numeric|required'
+
                 ]);
             }
         }
@@ -84,13 +93,20 @@ class VotesCreate extends Component
             'school_id'             => $this->school_id,
             'class_room_id'         => $this->classroom_id,
             'table_id'              => $this->table_id,
-            'user_id'               => Auth::id()
+            'user_id'               => Auth::id(),
+            'votes_total'           => $this->votes_total
         ]);
+        $t = 0;
+        //dd($this->politicalparties);
         foreach ($this->politicalparties as $item) {
+            $t = $t + $item['total_r'];
             VoteVotesTablesPoPa::create([
                 'votes_table_id'        => $vt->id,
                 'political_party_id'    => $item['id'],
-                'quantity'              => $item['quantity']
+                'quantity'              => $t,
+                'vote_reg'              => $item['total_r'],
+                'vote_pro'              => $item['total_p'],
+                'vote_dis'              => $item['total_d']
             ]);
         }
         $this->clearFrom();
@@ -98,11 +114,17 @@ class VotesCreate extends Component
     }
     public function recalculatetotal()
     {
-        $tt = 0;
+        $tr = 0;
+        $tp = 0;
+        $td = 0;
         foreach ($this->politicalparties as $item) {
-            $tt = $tt + (int) $item['quantity'];
+            $tr = $tr + (int) $item['total_r'];
+            $tp = $tp + (int) $item['total_p'];
+            $td = $td + (int) $item['total_d'];
         }
-        $this->total = $tt;
+        $this->total_r = $tr;
+        $this->total_p = $tp;
+        $this->total_d = $td;
     }
     public function clearFrom()
     {
@@ -110,8 +132,11 @@ class VotesCreate extends Component
         $this->table_id = null;
         $this->type_id = null;
         $this->total = 0;
+        $this->votes_total = null;
         foreach ($this->politicalparties as $k => $item) {
-            $this->politicalparties[$k]['quantity'] = 0;
+            $this->politicalparties[$k]['total_r'] = 0;
+            $this->politicalparties[$k]['total_p'] = 0;
+            $this->politicalparties[$k]['total_d'] = 0;
         }
     }
 }

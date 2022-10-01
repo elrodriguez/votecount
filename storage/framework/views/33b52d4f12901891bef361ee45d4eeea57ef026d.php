@@ -100,10 +100,24 @@
             <?php endif; ?>
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('conteodevotos_registro_votos')): ?>
             <li class="<?php echo e($path[0] == 'votecount' && $path[1] == 'votes' ? 'active open' : ''); ?>">
-                <a href="<?php echo e(route('votecount_votes')); ?>" title="votos" data-filter-tags="votos">
+                <a href="javascript:void(0);" title="votos" data-filter-tags="votos">
                     <i class="fal fa-money-check-edit"></i>
                     <span class="nav-link-text" data-i18n="nav.votos">REGISTRAR VOTOS</span>
                 </a>
+                <ul>
+                    <li class="<?php echo e($path[0] == 'votecount' && $path[1] == 'votes' && $path[2] == 'list' ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('votecount_votes')); ?>" title="Listado" data-filter-tags="Listado">
+                            <span class="nav-link-text" data-i18n="nav.listado">Listado</span>
+                        </a>
+                    </li>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('conteodevotos_registro_votos')): ?>
+                    <li class="<?php echo e($path[0] == 'votecount' && $path[1] == 'votes' && $path[2] == 'create' ? 'active' : ''); ?>">
+                        <a href="<?php echo e(route('votecount_votes_create')); ?>" title="Nueva mesa" data-filter-tags="Nueva mesa">
+                            <span class="nav-link-text" data-i18n="nav.nueva_mesa">Nuevo</span>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
             </li>
             <?php endif; ?>
         </ul>

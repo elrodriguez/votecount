@@ -3,26 +3,7 @@
         <div class="card-body">
             <form class="needs-validation <?php echo e($errors->any()?'was-validated':''); ?>" novalidate="">
                 <div class="form-row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label" for="type_id">Tipo<span class="text-danger">*</span> </label>
-
-                        <select wire:model="type_id" id="type_id" class="custom-select" required="">
-                            <option value="">Seleccionar</option>
-                            <option value="P">Provincial</option>
-                            <option value="D">Distrital</option>
-                        </select>
-
-                        <?php $__errorArgs = ['type_id'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
-                        <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    </div>
+                    
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="school_id">Colegio<span class="text-danger">*</span> </label>
                         <div wire:ignore>
@@ -82,34 +63,92 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <ul class="list-group">
-                            <?php $__currentLoopData = $politicalparties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $politicalparty): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center p-0 m-0">
-                                    <img src="<?php echo e(asset('storage/'.$politicalparty['logo'])); ?>" class="mr-5 p-0 m-0" style="width: 50px">
-                                    <h3 class="p-0 m-0"><?php echo e($politicalparty['name']); ?></h3>
-                                </div>
-                                <input wire:model="politicalparties.<?php echo e($key); ?>.quantity" name="politicalparties[<?php echo e($key); ?>].quantity" type="number" class="form-control" style="width: 100px">
-                                <?php $__errorArgs = ['politicalparties.'.$key.'.quantity'];
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="votes_total">Total Votantes<span class="text-danger">*</span> </label>
+                        <input wire:model="votes_total" type="text" class="form-control" id="votes_total">
+                        <?php $__errorArgs = ['votes_total'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                <div class="invalid-feedback-2"><?php echo e($message); ?></div>
-                                <?php unset($message);
+                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                            </li>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <table class="table">
+                            <tr>
+                                <th colspan="2">Partido o Movimiento Político</th>
+                                <th class="text-center">Voto Regional</th>
+                                <th class="text-center">Voto Provincial</th>
+                                <th class="text-center">Voto Distrital</th>
+                            </tr>
+                            <?php $__currentLoopData = $politicalparties; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $politicalparty): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <tr>
+                                <td class="align-middle">
+                                    <img src="<?php echo e(asset($politicalparty['logo'])); ?>" class="mr-5 p-0 m-0" style="width: 50px">
+                                </td>
+                                <td class="align-middle">
+                                    <h3 class="p-0 m-0"><?php echo e($politicalparty['name']); ?></h3>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.<?php echo e($key); ?>.total_r" name="politicalparties[<?php echo e($key); ?>].total_r" type="number" class="form-control" style="width: 100px">
+                                    <?php $__errorArgs = ['politicalparties.'.$key.'.total_r'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.<?php echo e($key); ?>.total_p" name="politicalparties[<?php echo e($key); ?>].total_p" type="number" class="form-control" style="width: 100px">
+                                    <?php $__errorArgs = ['politicalparties.'.$key.'.total_p'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.<?php echo e($key); ?>.total_d" name="politicalparties[<?php echo e($key); ?>].total_d" type="number" class="form-control" style="width: 100px">
+                                    <?php $__errorArgs = ['politicalparties.'.$key.'.total_d'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </td>
+                            </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center p-0 m-0">
-                                    <h3 class="p-0 m-0">Total Votos</h3>
-                                </div>
-                                <input wire:model="total" type="number" readonly class="form-control" style="width: 100px">
-                            </li>
-                        </ul>
+                            <tr>
+                                <td class="text-right align-middle" colspan="2">
+                                    <h3 class="p-0 m-0">Total de Votos</h3>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_r" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_p" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_d" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </form>

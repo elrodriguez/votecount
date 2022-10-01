@@ -3,7 +3,7 @@
         <div class="card-body">
             <form class="needs-validation {{ $errors->any()?'was-validated':'' }}" novalidate="">
                 <div class="form-row">
-                    <div class="col-md-3 mb-3">
+                    {{-- <div class="col-md-3 mb-3">
                         <label class="form-label" for="type_id">Tipo<span class="text-danger">*</span> </label>
 
                         <select wire:model="type_id" id="type_id" class="custom-select" required="">
@@ -15,7 +15,7 @@
                         @error('type_id')
                         <div class="invalid-feedback-2">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="school_id">Colegio<span class="text-danger">*</span> </label>
                         <div wire:ignore>
@@ -54,27 +54,64 @@
                         <div class="invalid-feedback-2">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="votes_total">Total Votantes<span class="text-danger">*</span> </label>
+                        <input wire:model="votes_total" type="text" class="form-control" id="votes_total">
+                        @error('votes_total')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                    </div>
                     <div class="col-md-12 mb-3">
-                        <ul class="list-group">
+                        <table class="table">
+                            <tr>
+                                <th colspan="2">Partido o Movimiento Político</th>
+                                <th class="text-center">Voto Regional</th>
+                                <th class="text-center">Voto Provincial</th>
+                                <th class="text-center">Voto Distrital</th>
+                            </tr>
                             @foreach($politicalparties as $key => $politicalparty)
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center p-0 m-0">
+                            <tr>
+                                <td class="align-middle">
                                     <img src="{{ asset($politicalparty['logo']) }}" class="mr-5 p-0 m-0" style="width: 50px">
+                                </td>
+                                <td class="align-middle">
                                     <h3 class="p-0 m-0">{{ $politicalparty['name'] }}</h3>
-                                </div>
-                                <input wire:model="politicalparties.{{ $key }}.quantity" name="politicalparties[{{ $key }}].quantity" type="number" class="form-control" style="width: 100px">
-                                @error('politicalparties.'.$key.'.quantity')
-                                <div class="invalid-feedback-2">{{ $message }}</div>
-                                @enderror
-                            </li>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.{{ $key }}.total_r" name="politicalparties[{{ $key }}].total_r" type="number" class="form-control" style="width: 100px">
+                                    @error('politicalparties.'.$key.'.total_r')
+                                    <div class="invalid-feedback-2">{{ $message }}</div>
+                                    @enderror
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.{{ $key }}.total_p" name="politicalparties[{{ $key }}].total_p" type="number" class="form-control" style="width: 100px">
+                                    @error('politicalparties.'.$key.'.total_p')
+                                    <div class="invalid-feedback-2">{{ $message }}</div>
+                                    @enderror
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="politicalparties.{{ $key }}.total_d" name="politicalparties[{{ $key }}].total_d" type="number" class="form-control" style="width: 100px">
+                                    @error('politicalparties.'.$key.'.total_d')
+                                    <div class="invalid-feedback-2">{{ $message }}</div>
+                                    @enderror
+                                </td>
+                            </tr>
                             @endforeach
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center p-0 m-0">
-                                    <h3 class="p-0 m-0">Total Votos</h3>
-                                </div>
-                                <input wire:model="total" type="number" readonly class="form-control" style="width: 100px">
-                            </li>
-                        </ul>
+                            <tr>
+                                <td class="text-right align-middle" colspan="2">
+                                    <h3 class="p-0 m-0">Total de Votos</h3>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_r" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_p" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                                <td class="text-center align-middle">
+                                    <input wire:model="total_d" type="number" readonly class="form-control" style="width: 100px">
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </form>

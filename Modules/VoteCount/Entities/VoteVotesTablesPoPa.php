@@ -12,7 +12,10 @@ class VoteVotesTablesPoPa extends Model
     protected $fillable = [
         'political_party_id',
         'votes_table_id',
-        'quantity'
+        'quantity',
+        'vote_reg',
+        'vote_pro',
+        'vote_dis'
     ];
 
     protected static function newFactory()

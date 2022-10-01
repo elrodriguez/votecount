@@ -14,5 +14,5 @@
     </div>
 @endsection
 @section('content')
-
+<livewire:votecount::votes.votes-total />
 @endsection

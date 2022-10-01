@@ -24,12 +24,12 @@
                         </span>
                     @endif
                 </div>
-                <input wire:keydown.enter="tablesSearch" wire:model.defer="search" type="text" class="form-control border-left-0 bg-transparent pl-0" placeholder="Escriba aquí...">
+                <input wire:keydown.enter="votesSearch" wire:model.defer="search" type="text" class="form-control border-left-0 bg-transparent pl-0" placeholder="Escriba aquí...">
                 <div class="input-group-append">
-                    <button wire:click="tablesSearch" class="btn btn-default waves-effect waves-themed" type="button">Buscar</button>
+                    <button wire:click="votesSearch" class="btn btn-default waves-effect waves-themed" type="button">Buscar</button>
 
-                    <a href="{{ route('votecount_tables_create') }}" class="btn btn-success waves-effect waves-themed" type="button">Nuevo</a>
-  
+                    <a href="{{ route('votecount_votes_create') }}" class="btn btn-success waves-effect waves-themed" type="button">Nuevo</a>
+
                 </div>
             </div>
         </div>
@@ -39,55 +39,38 @@
                     <tr>
                         <th class="text-center">#</th>
                         <th class="text-center">{{ __('labels.actions') }}</th>
-                        <th>NOMBRE DEL LOCAL</th>
-                        <th>AULA</th>
-                        <th>NÚMERO MESA</th>
-                        <th>NÚMERO ORDEN</th>
-                        <th>PABELLÓN</th>
-                        <th>PISO</th>
-                        <th>PERSONERO</th>
+                        <th >PERSONERO</th>
+                        <th >PROVINCIA</th>
+                        <th >DISTRITO</th>
+                        <th >NOMBRE DEL LOCAL</th>
+                        <th >AULA</th>
+                        <th >MESA</th>
+                        <th >TOTAL VOTOS</th>
                     </tr>
                 </thead>
                 <tbody class="">
-                    @foreach($tables as $key => $table)
+                    @foreach($votes as $key => $vote)
                     <tr>
                         <td class="text-center align-middle">{{ $key + 1 }}</td>
                         <td class="text-center tdw-50 align-middle">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-secondary rounded-circle btn-icon waves-effect waves-themed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <i class="fal fa-cogs"></i>
-                                </button>
-                                <div class="dropdown-menu" style="position: absolute; will-change: top, left; top: 35px; left: 0px;" x-placement="bottom-start">
-
-                                    <a href="{{ route('votecount_tables_edit',$table->id) }}" class="dropdown-item">
-                                        <i class="fal fa-pencil-alt mr-1"></i>{{ __('labels.edit') }}
-                                    </a>
-                                    {{-- <a href="{{ route('votecount_tables_classrooms',$table->id) }}" class="dropdown-item">
-                                        <i class="fal fa-chalkboard-teacher mr-1"></i>Aulas
-                                    </a> --}}
-                                    <div class="dropdown-divider"></div>
-
-                                    <button onclick="confirmDelete({{ $table->id }})" type="button" class="dropdown-item text-danger">
-                                        <i class="fal fa-trash-alt mr-1"></i>{{ __('labels.delete') }}
-                                    </button>
-                                    
-                                </div>
-                            </div>
+                            <button onclick="confirmDelete({{ $vote->id }})" type="button" class="btn btn-danger btn-icon rounded-circle waves-effect waves-themed">
+                                <i class="fal fa-trash-alt"></i>
+                            </button>
                         </td>
-                        <td class="align-middle">{{ $table->full_name }}</td>
-                        <td class="align-middle">{{ $table->name }}</td>
-                        <td class="align-middle text-right">{{ $table->number_table }}</td>
-                        <td class="align-middle text-right">{{ $table->number_order }}</td>
-                        <td class="align-middle text-right">{{ $table->pavilion }}</td>
-                        <td class="align-middle text-right">{{ $table->flat }}</td>
-                        <td class="align-middle">{{ $table->person_number }} - {{ $table->person_name }}</td>
+                        <td class="align-middle">{{ $vote->person_number }} - {{ $vote->person_name }}</td>
+                        <td class="align-middle">{{ $vote->province_name }}</td>
+                        <td class="align-middle">{{ $vote->district_name }}</td>
+                        <td class="align-middle">{{ $vote->school_name }}</td>
+                        <td class="align-middle">{{ $vote->classroom_name }}</td>
+                        <td class="align-middle">{{ $vote->number_table }}</td>
+                        <td class="align-middle">{{ $vote->votes_total }}</td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <div class="card-footer  pb-0 d-flex flex-row align-items-center">
-            <div class="ml-auto">{{ $tables->links() }}</div>
+            <div class="ml-auto">{{ $votes->links() }}</div>
         </div>
     </div>
     <script type="text/javascript">
@@ -116,7 +99,7 @@
                 callback: function(result)
                 {
                     if(result){
-                        @this.deleteTable(id)
+                        @this.deleteVotes(id)
                     }
                 }
             });

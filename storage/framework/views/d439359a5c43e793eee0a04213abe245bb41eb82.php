@@ -1,3 +1,7 @@
+
+<?php $__env->startSection('styles'); ?>
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(url('themes/smart-admin/css/formplugins/select2/select2.bundle.css')); ?>">
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('breadcrumb'); ?>
     <?php if (isset($component)) { $__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\CompanyName::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
@@ -14,6 +18,8 @@
 <?php unset($__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9); ?>
 <?php endif; ?>
     <li class="breadcrumb-item"><?php echo e(__('votecount::labels.module_name')); ?></li>
+    <li class="breadcrumb-item"><a href="<?php echo e(route('votecount_votes')); ?>"><?php echo e(__('votecount::labels.lbl_record_votes')); ?></a></li>
+    <li class="breadcrumb-item"><?php echo e(__('labels.new')); ?></li>
     <li class="position-absolute pos-top pos-right d-none d-sm-block"><?php if (isset($component)) { $__componentOriginalab70499045def3ea46a51a0c5d10e7b6f1952525 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\JsGetDate::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('js-get-date'); ?>
@@ -31,29 +37,31 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('subheader'); ?>
     <h1 class="subheader-title">
-        <i class='subheader-icon fal fa-tachometer-alt-fast'></i>Tablero <span class='fw-300'>de resumen</span> <sup class='badge badge-primary fw-500'>New</sup>
-        <small>Disponibles para el usuario</small>
+        <i class="subheader-icon fal fa-money-check-edit"></i></i><?php echo e(__('votecount::labels.lbl_record_votes')); ?><sup class='badge badge-primary fw-500'><?php echo e(__('labels.new')); ?></sup>   
     </h1>
     <div class="subheader-block">
-        Dashboard
+        <?php echo e(__('labels.new')); ?>
+
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('votecount::votes.votes-total', [])->html();
-} elseif ($_instance->childHasBeenRendered('v70Dm4q')) {
-    $componentId = $_instance->getRenderedChildComponentId('v70Dm4q');
-    $componentTag = $_instance->getRenderedChildComponentTagName('v70Dm4q');
+    $html = \Livewire\Livewire::mount('votecount::votes.votes-create', [])->html();
+} elseif ($_instance->childHasBeenRendered('BXsjHRr')) {
+    $componentId = $_instance->getRenderedChildComponentId('BXsjHRr');
+    $componentTag = $_instance->getRenderedChildComponentTagName('BXsjHRr');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('v70Dm4q');
+    $_instance->preserveRenderedChild('BXsjHRr');
 } else {
-    $response = \Livewire\Livewire::mount('votecount::votes.votes-total', []);
+    $response = \Livewire\Livewire::mount('votecount::votes.votes-create', []);
     $html = $response->html();
-    $_instance->logRenderedChild('v70Dm4q', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('BXsjHRr', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
 <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('votecount::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/index.blade.php ENDPATH**/ ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(url('themes/smart-admin/js/formplugins/select2/select2.bundle.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('votecount::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/votes/create.blade.php ENDPATH**/ ?>

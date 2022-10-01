@@ -36,31 +36,29 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('subheader'); ?>
     <h1 class="subheader-title">
-        <i class="subheader-icon fal fa-money-check-edit"></i></i><?php echo e(__('votecount::labels.lbl_record_votes')); ?><sup class='badge badge-primary fw-500'><?php echo e(__('labels.new')); ?></sup>   
+        <i class="subheader-icon fal fa-money-check-edit"></i></i><?php echo e(__('votecount::labels.lbl_record_votes')); ?><sup class='badge badge-primary fw-500'><?php echo e(__('labels.list')); ?></sup>   
     </h1>
     <div class="subheader-block">
-        <?php echo e(__('labels.new')); ?>
+        <?php echo e(__('labels.list')); ?>
 
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php
 if (! isset($_instance)) {
-    $html = \Livewire\Livewire::mount('votecount::votes.votes-create', [])->html();
-} elseif ($_instance->childHasBeenRendered('csOosYS')) {
-    $componentId = $_instance->getRenderedChildComponentId('csOosYS');
-    $componentTag = $_instance->getRenderedChildComponentTagName('csOosYS');
+    $html = \Livewire\Livewire::mount('votecount::votes.votes-list', [])->html();
+} elseif ($_instance->childHasBeenRendered('cvjCKj6')) {
+    $componentId = $_instance->getRenderedChildComponentId('cvjCKj6');
+    $componentTag = $_instance->getRenderedChildComponentTagName('cvjCKj6');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('csOosYS');
+    $_instance->preserveRenderedChild('cvjCKj6');
 } else {
-    $response = \Livewire\Livewire::mount('votecount::votes.votes-create', []);
+    $response = \Livewire\Livewire::mount('votecount::votes.votes-list', []);
     $html = $response->html();
-    $_instance->logRenderedChild('csOosYS', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('cvjCKj6', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
 <?php $__env->stopSection(); ?>
-<?php $__env->startSection('script'); ?>
-    <script src="<?php echo e(url('themes/smart-admin/js/formplugins/select2/select2.bundle.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('votecount::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/votes/index.blade.php ENDPATH**/ ?>

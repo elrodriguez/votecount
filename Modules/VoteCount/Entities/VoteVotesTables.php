@@ -14,7 +14,8 @@ class VoteVotesTables extends Model
         'school_id',
         'class_room_id',
         'table_id',
-        'user_id'
+        'user_id',
+        'votes_total'
     ];
 
     protected static function newFactory()

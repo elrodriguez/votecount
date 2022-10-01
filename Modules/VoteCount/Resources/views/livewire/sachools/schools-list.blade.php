@@ -24,12 +24,12 @@
                         </span>
                     @endif
                 </div>
-                <input wire:keydown.enter="schoolsearch" wire:model.defer="search" type="text" class="form-control border-left-0 bg-transparent pl-0" placeholder="Escriba aquí...">
+                <input wire:keydown.enter="schoolsSearch" wire:model.defer="search" type="text" class="form-control border-left-0 bg-transparent pl-0" placeholder="Escriba aquí...">
                 <div class="input-group-append">
-                    <button wire:click="schoolsearch" class="btn btn-default waves-effect waves-themed" type="button">Buscar</button>
-                    @can('configuraciones_bancos_nuevo')
+                    <button wire:click="schoolsSearch" class="btn btn-default waves-effect waves-themed" type="button">Buscar</button>
+
                     <a href="{{ route('votecount_schools_create') }}" class="btn btn-success waves-effect waves-themed" type="button">Nuevo</a>
-                    @endcan
+
                 </div>
             </div>
         </div>
