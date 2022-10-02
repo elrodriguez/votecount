@@ -2,21 +2,29 @@
 
 namespace Modules\Staff\Http\Livewire\Employees;
 
+use App\Imports\PersonImport;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Modules\Staff\Entities\StaEmployee;
 use App\Models\Person;
+use Exception;
 use Illuminate\Support\Facades\Lang;
 use Modules\Setting\Entities\SetCompany;
+use Maatwebsite\Excel\Facades\Excel;
+use Livewire\WithFileUploads;
 
 class EmployeesList extends Component
 {
     public $show;
     public $search;
     public $company_name;
+    public $file_excel;
+    public $loading_import = false;
 
     use WithPagination;
+    use WithFileUploads;
+
     protected $paginationTheme = 'bootstrap';
 
     public function mount()
@@ -98,5 +106,25 @@ class EmployeesList extends Component
         $this->deleteDirectory('storage/employees_photo/' . $id);
 
         $this->dispatchBrowserEvent('per-employees-delete', ['msg' => Lang::get('staff::labels.msg_delete')]);
+    }
+
+    public function import()
+    {
+        ini_set('memory_limit', '2048M');
+        ini_set('max_execution_time', '400');
+
+        try {
+            if ($this->file_excel) {
+
+                if (Excel::import(new PersonImport, $this->file_excel)) {
+                    $this->loading_import = true;
+                } else {
+                    $this->loading_import = false;
+                }
+            }
+        } catch (Exception $e) {
+            $this->loading_import = false;
+            dd($e->getMessage());
+        }
     }
 }

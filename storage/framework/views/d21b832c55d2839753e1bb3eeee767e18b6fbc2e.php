@@ -28,6 +28,9 @@
                 <div class="input-group-append">
                     <button wire:click="employeesSearch" class="btn btn-default waves-effect waves-themed" type="button"><?php echo app('translator')->get('staff::labels.btn_search'); ?></button>
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('personal_empleados_nuevo')): ?>
+                    <button onclick="openModalImportEmployees()" class="btn btn-warning waves-effect waves-themed" type="button"><?php echo app('translator')->get('staff::labels.lbl_import'); ?></button>
+                    <?php endif; ?>
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('personal_empleados_nuevo')): ?>
                     <a href="<?php echo e(route('staff_employees_search')); ?>" class="btn btn-success waves-effect waves-themed" type="button"><?php echo app('translator')->get('staff::labels.btn_new'); ?></a>
                     <?php endif; ?>
                 </div>
@@ -102,7 +105,61 @@
             <div class="ml-auto"><?php echo e($employees->links()); ?></div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" wire:ignore.self id="modalImportEmployees" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><?php echo e(__('labels.to_import')); ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label" for="inputGroupFile01">Botón &amp; seleccionar a la derecha</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Subir</span>
+                            </div>
+                            <div class="custom-file">
+                                <input wire:model.defer="file_excel" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01">Elija el archivo</label>
+                            </div>
+                        </div>
+                        <span class="help-block">Consulte el formato del excel al administrador del sistema</span>
+                    </div>
+                    <?php if($loading_import): ?>
+                        <div class="alert alert-info mt-3" role="alert">
+                            <strong><?php echo e(__('labels.congratulations')); ?></strong> <?php echo e(__('labels.file_has_been_uploaded_successfully')); ?>
+
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo e(__('labels.close')); ?></button>
+                    <button wire:loading.remove wire:loading.attr="disabled" wire:click="import" type="button" class="btn btn-primary waves-effect waves-themed">
+                        <?php echo e(__('labels.save')); ?>
+
+                    </button>
+                    <button style="display:none" wire:target="import" wire:loading class="btn btn-primary waves-effect waves-themed" type="button" disabled="">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <?php echo e(__('labels.aca_loading')); ?>...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('livewire:load', function () {
+            // Your JS here.
+        })
+    </script>
     <script type="text/javascript">
+        function openModalImportEmployees(){
+            $('#modalImportEmployees').modal('show');
+        }
+
         function confirmDelete(id){
             initApp.playSound('<?php echo e(url("themes/smart-admin/media/sound")); ?>', 'bigbox')
             let box = bootbox.confirm({
