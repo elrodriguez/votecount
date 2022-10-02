@@ -42,15 +42,30 @@
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('votecount::votes.votes-total', [])->html();
-} elseif ($_instance->childHasBeenRendered('v70Dm4q')) {
-    $componentId = $_instance->getRenderedChildComponentId('v70Dm4q');
-    $componentTag = $_instance->getRenderedChildComponentTagName('v70Dm4q');
+} elseif ($_instance->childHasBeenRendered('oqMaKrt')) {
+    $componentId = $_instance->getRenderedChildComponentId('oqMaKrt');
+    $componentTag = $_instance->getRenderedChildComponentTagName('oqMaKrt');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('v70Dm4q');
+    $_instance->preserveRenderedChild('oqMaKrt');
 } else {
     $response = \Livewire\Livewire::mount('votecount::votes.votes-total', []);
     $html = $response->html();
-    $_instance->logRenderedChild('v70Dm4q', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('oqMaKrt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
+<?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('votecount::votes.votes-total-political-parties', [])->html();
+} elseif ($_instance->childHasBeenRendered('oJUFaZn')) {
+    $componentId = $_instance->getRenderedChildComponentId('oJUFaZn');
+    $componentTag = $_instance->getRenderedChildComponentTagName('oJUFaZn');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('oJUFaZn');
+} else {
+    $response = \Livewire\Livewire::mount('votecount::votes.votes-total-political-parties', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('oJUFaZn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

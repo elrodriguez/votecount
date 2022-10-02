@@ -15,4 +15,5 @@
 @endsection
 @section('content')
 <livewire:votecount::votes.votes-total />
+<livewire:votecount::votes.votes-total-political-parties />
 @endsection
