@@ -49,7 +49,7 @@
                             <?php endif; ?>
                         </td>
                         <td class="text-right align-middle">
-                            <?php if($this->totales->total_pro): ?>
+                            <?php if($this->totales->total_dis): ?>
                                 <?php echo e($parties_total['total_dis']); ?> / <?php echo e($totales->total_dis); ?>
 
                                 <?php

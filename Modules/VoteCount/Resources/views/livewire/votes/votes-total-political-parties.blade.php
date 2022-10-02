@@ -47,7 +47,7 @@
                             @endif
                         </td>
                         <td class="text-right align-middle">
-                            @if($this->totales->total_pro)
+                            @if($this->totales->total_dis)
                                 {{ $parties_total['total_dis'] }} / {{ $totales->total_dis}}
                                 @php
                                     $pd = (($parties_total['total_dis']/$totales->total_dis)*100);
