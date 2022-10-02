@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label class="form-label" for="classroom_id">Aula<span class="text-danger">*</span> </label>
+                        <label class="form-label" for="classroom_id">Aula <a onclick="openModalClassRoom()" href="javascript:void(0)">[Agregar +]</a></label>
                         <select wire:change="getTables" wire:model="classroom_id" id="classroom_id" class="custom-select" required="">
                             <option value="">Seleccionar</option>
                             @foreach($classrooms as $classroom)
@@ -43,7 +43,7 @@
                         @enderror
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label class="form-label" for="table_id">Mesa<span class="text-danger">*</span> </label>
+                        <label class="form-label" for="table_id">Mesa <a onclick="openModalTables()" href="javascript:void(0)">[Agregar +]</a></label>
                         <select wire:model="table_id" id="table_id" class="custom-select" required="">
                             <option value="">Seleccionar</option>
                             @foreach($tables as $table)
@@ -121,12 +121,94 @@
             <button wire:click="save" wire:loading.attr="disabled" type="button" class="btn btn-info ml-auto waves-effect waves-themed">Guardar</button>
         </div>
     </div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="modalClassRoom" tabindex="-1" aria-labelledby="modalClassRoomLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalClassRoomLabel">Nuevo Aula</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="new_classroom">Nombre<span class="text-danger">*</span> </label>
+                            <input wire:model="new_classroom" id="new_classroom" type="text" class="form-control">
+                            @error('new_classroom')
+                            <div class="invalid-feedback-2">{{ $message }}</div>
+                            @enderror
+                            @error('school_id')
+                            <div class="invalid-feedback-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('labels.close') }}</button>
+                    <button wire:click="saveNewClassRoom" type="button" class="btn btn-primary">{{ __('labels.save') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="modalTables" tabindex="-1" aria-labelledby="modalTablesLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTablesLabel">Nuevo Mesa de Votacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="new_number_table">Numero Mesa<span class="text-danger">*</span> </label>
+                        <input wire:model="new_number_table" id="new_number_table" type="text" class="form-control">
+                        @error('new_number_table')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                        @error('classroom_id')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                        @error('school_id')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label" for="person_id">Personero<span class="text-danger">*</span> </label>
+                        <div wire:ignore>
+                            <select wire:model="personero_id" id="person_id" class="custom-select" required="">
+                                <option value="">Seleccionar</option>
+                                @foreach($people as $person)
+                                <option value="{{ $person->id }}">{{ $person->number }} - {{ $person->full_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('personero_id')
+                        <div class="invalid-feedback-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('labels.close') }}</button>
+                    <button wire:click="saveNewTables" type="button" class="btn btn-primary">{{ __('labels.save') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         document.addEventListener('livewire:load', function () {
             $('#school_id').select2().on('select2:select', function (e) {
                 let data = e.params.data;
                 @this.set('school_id',data.id);
                 @this.getClassroom(data.id);
+            });
+            
+            $('#person_id').select2().on('select2:select', function (e) {
+                let data = e.params.data;
+                @this.set('personero_id',data.id);
             });
         });
         document.addEventListener('vote-table-save', event => {
@@ -140,5 +222,17 @@
             });
             box.find('.modal-content').css({'background-color': 'rgba(122, 85, 7, 0.5)'});
         });
+        document.addEventListener('vote-close-modal-classroom', event => {
+            $('#modalClassRoom').modal('hide');
+        });
+        document.addEventListener('vote-close-modal-table', event => {
+            $('#modalTables').modal('hide');
+        });
+        function openModalClassRoom(){
+            $('#modalClassRoom').modal('show');
+        }
+        function openModalTables(){
+            $('#modalTables').modal('show');
+        }
     </script>
 </div>

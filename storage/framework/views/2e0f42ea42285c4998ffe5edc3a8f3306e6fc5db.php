@@ -26,7 +26,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label class="form-label" for="classroom_id">Aula<span class="text-danger">*</span> </label>
+                        <label class="form-label" for="classroom_id">Aula <a onclick="openModalClassRoom()" href="javascript:void(0)">[Agregar +]</a></label>
                         <select wire:change="getTables" wire:model="classroom_id" id="classroom_id" class="custom-select" required="">
                             <option value="">Seleccionar</option>
                             <?php $__currentLoopData = $classrooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classroom): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -45,7 +45,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label class="form-label" for="table_id">Mesa<span class="text-danger">*</span> </label>
+                        <label class="form-label" for="table_id">Mesa <a onclick="openModalTables()" href="javascript:void(0)">[Agregar +]</a></label>
                         <select wire:model="table_id" id="table_id" class="custom-select" required="">
                             <option value="">Seleccionar</option>
                             <?php $__currentLoopData = $tables; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $table): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -158,12 +158,136 @@ unset($__errorArgs, $__bag); ?>
             <button wire:click="save" wire:loading.attr="disabled" type="button" class="btn btn-info ml-auto waves-effect waves-themed">Guardar</button>
         </div>
     </div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="modalClassRoom" tabindex="-1" aria-labelledby="modalClassRoomLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalClassRoomLabel">Nuevo Aula</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="new_classroom">Nombre<span class="text-danger">*</span> </label>
+                            <input wire:model="new_classroom" id="new_classroom" type="text" class="form-control">
+                            <?php $__errorArgs = ['new_classroom'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            <?php $__errorArgs = ['school_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo e(__('labels.close')); ?></button>
+                    <button wire:click="saveNewClassRoom" type="button" class="btn btn-primary"><?php echo e(__('labels.save')); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="modalTables" tabindex="-1" aria-labelledby="modalTablesLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTablesLabel">Nuevo Mesa de Votacion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label" for="new_number_table">Numero Mesa<span class="text-danger">*</span> </label>
+                        <input wire:model="new_number_table" id="new_number_table" type="text" class="form-control">
+                        <?php $__errorArgs = ['new_number_table'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        <?php $__errorArgs = ['classroom_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                        <?php $__errorArgs = ['school_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label" for="person_id">Personero<span class="text-danger">*</span> </label>
+                        <div wire:ignore>
+                            <select wire:model="personero_id" id="person_id" class="custom-select" required="">
+                                <option value="">Seleccionar</option>
+                                <?php $__currentLoopData = $people; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $person): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($person->id); ?>"><?php echo e($person->number); ?> - <?php echo e($person->full_name); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </select>
+                        </div>
+                        <?php $__errorArgs = ['personero_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                        <div class="invalid-feedback-2"><?php echo e($message); ?></div>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo e(__('labels.close')); ?></button>
+                    <button wire:click="saveNewTables" type="button" class="btn btn-primary"><?php echo e(__('labels.save')); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         document.addEventListener('livewire:load', function () {
             $('#school_id').select2().on('select2:select', function (e) {
                 let data = e.params.data;
                 window.livewire.find('<?php echo e($_instance->id); ?>').set('school_id',data.id);
                 window.livewire.find('<?php echo e($_instance->id); ?>').getClassroom(data.id);
+            });
+            
+            $('#person_id').select2().on('select2:select', function (e) {
+                let data = e.params.data;
+                window.livewire.find('<?php echo e($_instance->id); ?>').set('personero_id',data.id);
             });
         });
         document.addEventListener('vote-table-save', event => {
@@ -177,6 +301,18 @@ unset($__errorArgs, $__bag); ?>
             });
             box.find('.modal-content').css({'background-color': 'rgba(122, 85, 7, 0.5)'});
         });
+        document.addEventListener('vote-close-modal-classroom', event => {
+            $('#modalClassRoom').modal('hide');
+        });
+        document.addEventListener('vote-close-modal-table', event => {
+            $('#modalTables').modal('hide');
+        });
+        function openModalClassRoom(){
+            $('#modalClassRoom').modal('show');
+        }
+        function openModalTables(){
+            $('#modalTables').modal('show');
+        }
     </script>
 </div>
 <?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/livewire/votes/votes-create.blade.php ENDPATH**/ ?>

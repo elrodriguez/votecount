@@ -2,6 +2,7 @@
 
 namespace Modules\VoteCount\Http\Livewire\Votes;
 
+use App\Models\Person;
 use Livewire\Component;
 use Modules\VoteCount\Entities\VoteClassRoom;
 use Modules\VoteCount\Entities\VoteSchool;
@@ -18,6 +19,7 @@ class VotesCreate extends Component
     public $classrooms = [];
     public $tables = [];
     public $politicalparties = [];
+    public $people = [];
 
     public $school_id;
     public $classroom_id;
@@ -28,6 +30,9 @@ class VotesCreate extends Component
     public $total_d = 0;
     public $total = 0;
     public $votes_total;
+    public $new_classroom;
+    public $new_number_table;
+    public $personero_id;
 
     public function mount()
     {
@@ -38,6 +43,7 @@ class VotesCreate extends Component
     public function render()
     {
         $this->recalculatetotal();
+        $this->people = Person::whereNotIn('id', ['1', '2'])->select('id', 'number', 'full_name')->get();
         return view('votecount::livewire.votes.votes-create');
     }
 
@@ -138,5 +144,45 @@ class VotesCreate extends Component
             $this->politicalparties[$k]['total_p'] = 0;
             $this->politicalparties[$k]['total_d'] = 0;
         }
+    }
+
+    public function saveNewClassRoom()
+    {
+        $this->validate([
+            'school_id' => 'required',
+            'new_classroom' => 'required'
+        ]);
+
+        $cr = VoteClassRoom::create([
+            'school_id' => $this->school_id,
+            'name'  =>  $this->new_classroom
+        ]);
+
+        $this->getClassroom($this->school_id);
+        $this->classroom_id = $cr->id;
+        $this->dispatchBrowserEvent('vote-close-modal-classroom', ['success' => true]);
+    }
+
+    public function saveNewTables()
+    {
+        $this->validate([
+            'school_id' => 'required',
+            'classroom_id' => 'required',
+            'new_number_table' => 'required'
+        ]);
+
+        $t = VoteTable::create([
+            'number_table' => $this->new_number_table,
+            'number_order' => $this->new_number_table,
+            'pavilion' => 1,
+            'flat' => 1,
+            'school_id' => $this->school_id,
+            'class_room_id' => $this->classroom_id,
+            'person_id' => $this->personero_id
+        ]);
+
+        $this->getTables();
+        $this->table_id = $t->id;
+        $this->dispatchBrowserEvent('vote-close-modal-table', ['success' => true]);
     }
 }

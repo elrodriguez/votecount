@@ -47,7 +47,7 @@
                     <th><?php echo app('translator')->get('staff::labels.lbl_admission_date'); ?></th>
                     <th><?php echo app('translator')->get('staff::labels.lbl_employee_type'); ?></th>
                     <th><?php echo app('translator')->get('staff::labels.lbl_occupation'); ?></th>
-                    <th><?php echo app('translator')->get('staff::labels.lbl_company'); ?></th>
+                    
                     <th class="text-center"><?php echo e(__('setting::labels.state')); ?></th>
                 </tr>
                 </thead>
@@ -80,15 +80,7 @@
                         <td class="align-middle"><?php echo e(date('d-m-Y', strtotime($employee->admission_date))); ?></td>
                         <td class="align-middle"><?php echo e($employee->name_employee_type); ?></td>
                         <td class="align-middle"><?php echo e($employee->name_occupation); ?></td>
-                        <td class="align-middle">
-                            <?php if($employee->name_company): ?>
-                                <?php echo e($employee->name_company); ?>
-
-                            <?php else: ?>
-                                <?php echo e($company_name); ?>
-
-                            <?php endif; ?>
-                        </td>
+                        
                         <td class="text-center align-middle">
                             <?php if($employee->state): ?>
                                 <span class="badge badge-success"><?php echo e(__('staff::labels.lbl_active')); ?></span>

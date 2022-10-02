@@ -17,13 +17,13 @@
             <th style="background-color: #AEB6BF  ;">TOTAL VOTOS</th>
         </tr>
         <tr>
-            <td><?php echo e($ga->person_number); ?> - <?php echo e($ga->person_name); ?></td>
-            <td><?php echo e($ga->province_name); ?></td>
-            <td><?php echo e($ga->district_name); ?></td>
-            <td><?php echo e($ga->school_name); ?></td>
-            <td><?php echo e($ga->classroom_name); ?></td>
-            <td><?php echo e($ga->number_table); ?></td>
-            <td><?php echo e($ga->votes_total); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->person_number); ?> - <?php echo e($ga->person_name); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->province_name); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->district_name); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->school_name); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->classroom_name); ?></td>
+            <td style="background-color: #AEB6BF ;"><?php echo e($ga->number_table); ?></td>
+            <td ><?php echo e($ga->votes_total); ?></td>
         </tr>
         <?php
             $par = \Modules\VoteCount\Entities\VoteVotesTablesPoPa::join('vote_political_parties','political_party_id','vote_political_parties.id')
