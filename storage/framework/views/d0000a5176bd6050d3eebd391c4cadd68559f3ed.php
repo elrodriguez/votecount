@@ -1,9 +1,5 @@
 <div>
-    <div class="row">
-        <div class="col-sm-6 col-xl-3 mb-3">
-            <a href="<?php echo e(route('votecount_votes_export')); ?>" type="button" class="btn btn-warning btn-pills waves-effect waves-themed">Exportar Toda la data a excel</a>
-        </div>
-    </div>
+    
     <div class="row">
         <div class="col-sm-4 col-xl-3">
             <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">

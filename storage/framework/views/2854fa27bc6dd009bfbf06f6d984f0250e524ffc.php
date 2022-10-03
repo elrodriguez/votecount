@@ -32,7 +32,7 @@
                                     $pc = (($parties_total['total_reg']/$totales->total_reg)*100);
                                 ?>
                                 <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo e($pc); ?>%" aria-valuenow="<?php echo e($pc); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: <?php echo e($pc); ?>%" aria-valuenow="<?php echo e($pc); ?>" aria-valuemin="0" aria-valuemax="100"><?php echo e(number_format($pc, 2, ',', '')); ?>%</div>
                                 </div>
                             <?php endif; ?>
                         </td>
@@ -44,7 +44,7 @@
                                     $pp = (($parties_total['total_pro']/$totales->total_pro)*100);
                                 ?>
                                 <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo e($pp); ?>%" aria-valuenow="<?php echo e($pp); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?php echo e($pp); ?>%" aria-valuenow="<?php echo e($pp); ?>" aria-valuemin="0" aria-valuemax="100"><?php echo e(number_format($pp, 2, ',', '')); ?>%</div>
                                 </div>
                             <?php endif; ?>
                         </td>
@@ -56,7 +56,7 @@
                                     $pd = (($parties_total['total_dis']/$totales->total_dis)*100);
                                 ?>
                                 <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo e($pd); ?>%" aria-valuenow="<?php echo e($pd); ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo e($pd); ?>%" aria-valuenow="<?php echo e($pd); ?>" aria-valuemin="0" aria-valuemax="100"><?php echo e(number_format($pd, 2, ',', '')); ?>%</div>
                                 </div>
                             <?php endif; ?>
                         </td>

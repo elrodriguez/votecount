@@ -1,3 +1,6 @@
+<?php $__env->startSection('styles'); ?>
+    <link rel="stylesheet" media="screen, print" href="<?php echo e(url('themes/smart-admin/css/formplugins/select2/select2.bundle.css')); ?>">
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('breadcrumb'); ?>
     <?php if (isset($component)) { $__componentOriginalffde9e6d15fb644ab927a95d1432ec09268242d9 = $component; } ?>
 <?php $component = $__env->getContainer()->make(App\View\Components\CompanyName::class, [] + (isset($attributes) ? (array) $attributes->getIterator() : [])); ?>
@@ -39,36 +42,60 @@
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+<div class="row">
+    <div class="col-sm-6 col-xl-3 mb-3">
+        <a href="<?php echo e(route('votecount_votes_export')); ?>" type="button" class="btn btn-warning btn-pills waves-effect waves-themed">Exportar Toda la data a excel</a>
+    </div>
+</div>
+<?php
+if (! isset($_instance)) {
+    $html = \Livewire\Livewire::mount('votecount::votes.votes-analytics', [])->html();
+} elseif ($_instance->childHasBeenRendered('B7YkFBZ')) {
+    $componentId = $_instance->getRenderedChildComponentId('B7YkFBZ');
+    $componentTag = $_instance->getRenderedChildComponentTagName('B7YkFBZ');
+    $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
+    $_instance->preserveRenderedChild('B7YkFBZ');
+} else {
+    $response = \Livewire\Livewire::mount('votecount::votes.votes-analytics', []);
+    $html = $response->html();
+    $_instance->logRenderedChild('B7YkFBZ', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+}
+echo $html;
+?>
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('votecount::votes.votes-total', [])->html();
-} elseif ($_instance->childHasBeenRendered('oqMaKrt')) {
-    $componentId = $_instance->getRenderedChildComponentId('oqMaKrt');
-    $componentTag = $_instance->getRenderedChildComponentTagName('oqMaKrt');
+} elseif ($_instance->childHasBeenRendered('ER1Y6ub')) {
+    $componentId = $_instance->getRenderedChildComponentId('ER1Y6ub');
+    $componentTag = $_instance->getRenderedChildComponentTagName('ER1Y6ub');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('oqMaKrt');
+    $_instance->preserveRenderedChild('ER1Y6ub');
 } else {
     $response = \Livewire\Livewire::mount('votecount::votes.votes-total', []);
     $html = $response->html();
-    $_instance->logRenderedChild('oqMaKrt', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('ER1Y6ub', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
 <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('votecount::votes.votes-total-political-parties', [])->html();
-} elseif ($_instance->childHasBeenRendered('oJUFaZn')) {
-    $componentId = $_instance->getRenderedChildComponentId('oJUFaZn');
-    $componentTag = $_instance->getRenderedChildComponentTagName('oJUFaZn');
+} elseif ($_instance->childHasBeenRendered('Wg7lxuS')) {
+    $componentId = $_instance->getRenderedChildComponentId('Wg7lxuS');
+    $componentTag = $_instance->getRenderedChildComponentTagName('Wg7lxuS');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('oJUFaZn');
+    $_instance->preserveRenderedChild('Wg7lxuS');
 } else {
     $response = \Livewire\Livewire::mount('votecount::votes.votes-total-political-parties', []);
     $html = $response->html();
-    $_instance->logRenderedChild('oJUFaZn', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('Wg7lxuS', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(url('themes/smart-admin/js/statistics/easypiechart/easypiechart.bundle.js')); ?>"></script>
+    <script src="<?php echo e(url('themes/smart-admin/js/statistics/flot/flot.bundle.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('votecount::layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\partido\Modules/VoteCount\Resources/views/index.blade.php ENDPATH**/ ?>

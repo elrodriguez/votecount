@@ -1,4 +1,7 @@
 @extends('votecount::layouts.master')
+@section('styles')
+    <link rel="stylesheet" media="screen, print" href="{{ url('themes/smart-admin/css/formplugins/select2/select2.bundle.css') }}">
+@endsection
 @section('breadcrumb')
     <x-company-name></x-company-name>
     <li class="breadcrumb-item">{{ __('votecount::labels.module_name') }}</li>
@@ -14,6 +17,16 @@
     </div>
 @endsection
 @section('content')
+<div class="row">
+    <div class="col-sm-6 col-xl-3 mb-3">
+        <a href="{{ route('votecount_votes_export') }}" type="button" class="btn btn-warning btn-pills waves-effect waves-themed">Exportar Toda la data a excel</a>
+    </div>
+</div>
+<livewire:votecount::votes.votes-analytics />
 <livewire:votecount::votes.votes-total />
 <livewire:votecount::votes.votes-total-political-parties />
+@endsection
+@section('script')
+    <script src="{{ url('themes/smart-admin/js/statistics/easypiechart/easypiechart.bundle.js') }}"></script>
+    <script src="{{ url('themes/smart-admin/js/statistics/flot/flot.bundle.js') }}"></script>
 @endsection

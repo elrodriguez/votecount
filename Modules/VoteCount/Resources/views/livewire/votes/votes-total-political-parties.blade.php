@@ -31,7 +31,7 @@
                                     $pc = (($parties_total['total_reg']/$totales->total_reg)*100);
                                 @endphp
                                 <div class="progress">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ $pc }}%" aria-valuenow="{{ $pc }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ $pc }}%" aria-valuenow="{{ $pc }}" aria-valuemin="0" aria-valuemax="100">{{ number_format($pc, 2, ',', '') }}%</div>
                                 </div>
                             @endif
                         </td>
@@ -42,7 +42,7 @@
                                     $pp = (($parties_total['total_pro']/$totales->total_pro)*100);
                                 @endphp
                                 <div class="progress">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $pp }}%" aria-valuenow="{{ $pp }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $pp }}%" aria-valuenow="{{ $pp }}" aria-valuemin="0" aria-valuemax="100">{{ number_format($pp, 2, ',', '') }}%</div>
                                 </div>
                             @endif
                         </td>
@@ -53,7 +53,7 @@
                                     $pd = (($parties_total['total_dis']/$totales->total_dis)*100);
                                 @endphp
                                 <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $pd }}%" aria-valuenow="{{ $pd }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $pd }}%" aria-valuenow="{{ $pd }}" aria-valuemin="0" aria-valuemax="100">{{ number_format($pd, 2, ',', '') }}%</div>
                                 </div>
                             @endif
                         </td>
